@@ -3,8 +3,6 @@ module Zastonjski
 
 import Data.List
 
--- | Program za generiranje zastonjskih izrekov za tipe
--- module FreeTheorems where
 
 -- | Spremenljivka, ki predstavlja tip
 type TypeVariable = String
@@ -21,10 +19,8 @@ instance Show Type where
     show (TypeConst c) = c
     show (TypeList t) = "[" ++ (show t) ++ "]"
     show (TypeFun t1 t2) = case t1 of
-        TypeVar t1var -> t1var ++ " -> " ++ (show t2)
-        TypeConst t1const -> t1const ++ " -> " ++ (show t2)                    -- Ti dve vrstici sem dodal
-        TypeList t1list -> "[" ++ (show t1list) ++ "]" ++ " -> " ++ (show t2)  -- 
-        TypeFun _ _ -> "(" ++ (show t1) ++ ") -> " ++ (show t2)  
+        TypeFun _ _ -> "(" ++ (show t1) ++ ") -> " ++ (show t2)
+        _ -> (show t1) ++ " -> " ++ (show t2)
 
 -- | Spremenljivka, ki predstavlja izraz
 type TermVariable = String
@@ -37,8 +33,8 @@ data Term
 instance Show Term where
     show (TermVar v) = v
     show (TermApp t1 t2) = case t2 of
-        TermVar t2var -> (show t1) ++ " " ++ t2var
         TermApp _ _ -> (show t1) ++ " (" ++ (show t2) ++ ")"
+        _ -> (show t1) ++ " " ++ (show t2)
 
 -- | Relacijska spremenljivka
 type RelationVariable = String
@@ -52,20 +48,22 @@ data Relation = Relation { associatedType :: TypeVariable   -- ^ spremenljivka t
 
 -- | Logična formula, ki predstavlja zastonjski izrek
 data Formula
-	= ForallRelations RelationVariable (TypeVariable, TypeVariable) Formula -- ^ Kvantificira relacijsko spremenljivko in dva tipa
-	| ForallVariables TermVariable Type Formula                             -- ^ Kvantificira izrazovno spremenljivko določenega tipa
-	| ForallPairs (TermVariable, TermVariable) RelationVariable Formula     -- ^ Kvantificira dve izrazovni spremenljivki
-	| IsMember (Term, Term) RelationVariable                                -- ^ Par izrazov je v relaciji
+    = ForallRelations RelationVariable (TypeVariable, TypeVariable) Formula -- ^ Kvantificira relacijsko spremenljivko in dva tipa
+    | ForallVariables TermVariable Type Formula                             -- ^ Kvantificira izrazovno spremenljivko določenega tipa
+    | ForallPairs (TermVariable, TermVariable) RelationVariable Formula     -- ^ Kvantificira dve izrazovni spremenljivki
+    | IsMember (Term, Term) RelationVariable                                -- ^ Par izrazov je v relaciji
     | Implication Formula Formula                                           -- ^ Iz prve formule sledi druga formula
     | Equivalence Term Term                                                 -- ^ Izraza sta ekvivalentna
 
 instance Show Formula where
-    show (ForallRelations rv (tv1, tv2) fml) = "Forall " ++ rv ++ " between " ++ tv1 ++ " x " ++ tv2 ++ ".\n" ++ (show fml)
-    show (ForallVariables tv ty fml) = "Forall " ++ tv ++ " :: " ++ (show ty) ++ ".\n" ++ (show fml)
-    show (ForallPairs (tv1, tv2) rv fml) = "Forall (" ++ tv1 ++ ", " ++ tv2 ++ ") in " ++ rv ++ ". " ++ (show fml)
-    show (IsMember (term1, term2) rv) = "(" ++ (show term1) ++ ", " ++ (show term2) ++ ") in " ++ rv
-    show (Implication fml1 fml2) = "(" ++ (show fml1) ++ ")\n=> (" ++ (show fml2) ++ ")"
-    show (Equivalence term1 term2) = (show term1) ++ " = " ++ (show term2)
+    show f = toString f 0 where
+        toString formul n = case formul of
+            ForallRelations rv (tv1, tv2) fml -> "Forall " ++ rv ++ " between " ++ tv1 ++ " x " ++ tv2 ++ ".\n" ++ (replicate (n+2) ' ') ++ (toString fml $ n+2)
+            ForallVariables tv ty fml -> "Forall " ++ tv ++ " :: " ++ (show ty) ++ ".\n" ++ (replicate (n+2) ' ') ++ (toString fml $ n+2)
+            ForallPairs (tv1, tv2) rv fml -> "Forall (" ++ tv1 ++ ", " ++ tv2 ++ ") in " ++ rv ++ ". " ++ (toString fml n)
+            IsMember (term1, term2) rv -> "(" ++ (show term1) ++ ", " ++ (show term2) ++ ") in " ++ rv
+            Implication fml1 fml2 -> "(" ++ (toString fml1 n) ++ ")\n" ++ (replicate n ' ') ++ "=> (" ++ (toString fml2 $ n+3) ++ ")"
+            Equivalence term1 term2 -> (show term1) ++ " = " ++ (show term2)
 
 -- | Relacija, ki pripada seznamu
 data ListRelation = ListRelation { listrelvar :: RelationVariable   -- ^ Spremenljivka, ki predstavlja relacijo
@@ -76,9 +74,10 @@ data ListRelation = ListRelation { listrelvar :: RelationVariable   -- ^ Spremen
 instance Show ListRelation where
     show lr = (listrelvar lr) ++ " = {([],[])} union\n{(x : xs, y : ys) | (" ++ (show $ headformula lr) ++ ") and (" ++ (show $ tailformula lr) ++ ")}"
 
-toString :: [ListRelation] -> String
-toString lr = case lr of [] -> ""
-                         l:ls -> (show l) ++ "\n\n" ++ (toString ls)
+-- | Izpiše elemente seznama, ločene s praznimi vrsticami
+listToString :: Show a => [a] -> String
+listToString list = case list of [] -> ""
+                                 l:ls -> (show l) ++ "\n\n" ++ (listToString ls)
 
 -- | Izrek
 data Theorem = Theorem { theoremFormula :: Formula      -- ^ Formula, ki pripada izreku
@@ -86,7 +85,9 @@ data Theorem = Theorem { theoremFormula :: Formula      -- ^ Formula, ki pripada
                        }
 
 instance Show Theorem where
-    show theo = (show $ theoremFormula theo) ++ "\n\nwhere\n\n" ++ (toString $ theoremLRs theo)
+    show theo = case (theoremLRs theo) of
+        [] -> show $ theoremFormula theo
+        _ -> (show $ theoremFormula theo) ++ "\n\nwhere\n\n" ++ (listToString $ theoremLRs theo)
 
 -- | Shramba spremenljivk za relacije	
 relVarStore = ["R","S","T","U","V","Z"]
