@@ -1,3 +1,6 @@
+module Zastonjski
+    where
+
 import Data.List
 
 -- | Program za generiranje zastonjskih izrekov za tipe
@@ -19,7 +22,9 @@ instance Show Type where
     show (TypeList t) = "[" ++ (show t) ++ "]"
     show (TypeFun t1 t2) = case t1 of
         TypeVar t1var -> t1var ++ " -> " ++ (show t2)
-        TypeFun _ _ -> "(" ++ (show t1) ++ ") -> " ++ (show t2)
+        TypeConst t1const -> t1const ++ " -> " ++ (show t2)                    -- Ti dve vrstici sem dodal
+        TypeList t1list -> "[" ++ (show t1list) ++ "]" ++ " -> " ++ (show t2)  -- 
+        TypeFun _ _ -> "(" ++ (show t1) ++ ") -> " ++ (show t2)  
 
 -- | Spremenljivka, ki predstavlja izraz
 type TermVariable = String
