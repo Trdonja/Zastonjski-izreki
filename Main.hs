@@ -1,10 +1,17 @@
+import Data.Maybe
 import Parser
 import Zastonjski
 
 main = do
-    putStrLn "Vpiši predpis tipa"
+    putStrLn "Vpiši predpis tipa:"
     predpis <- getLine  -- Prebere predpis, ki ga podamo v standardnem vhodu
-    putStrLn "Vpiši ime tipa"
+    putStrLn "Vpiši ime tipa:"
     ime <- getLine
-    let izrek = theorem (parse predpis) ime
-    putStrLn $ "\nIzrek za " ++ ime ++ " :: " ++ predpis ++ ":\n\n" ++ (show izrek)
+    putStrLn (odgovor (parse predpis) ime) -- Izpiše izrek oziroma sporoči napako.
+
+
+odgovor :: Maybe Type -> String -> String
+odgovor tip ime
+   | isNothing tip = "Vnos je napačen."
+   | otherwise   = "\nIzrek za " ++ ime ++ " :: " ++ (show (fromJust tip)) ++ ":\n\n" ++ (show izrek)
+   where izrek = theorem ( fromJust tip) ime
