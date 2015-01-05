@@ -3,10 +3,10 @@ import Parser
 import Zastonjski
 
 main = do
-    putStrLn "Vpiši predpis tipa:"
-    predpis <- getLine  -- Prebere predpis, ki ga podamo v standardnem vhodu
     putStrLn "Vpiši ime tipa:"
-    ime <- getLine
+    ime <- getLine    -- Prebere ime predpisa.
+    putStrLn "Vpiši predpis tipa:"
+    predpis <- getLine  -- Prebere predpis, ki ga podamo v standardnem vhodu.
     putStrLn (odgovor (parse predpis) ime) -- Izpiše izrek oziroma sporoči napako.
 
 
