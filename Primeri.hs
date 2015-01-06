@@ -4,7 +4,7 @@ Description : Primeri tipov
 Copyright   : (c) Domen Močnik, 2015
                   Matej Aleksandorv 2015
 License     : GPL-3
-Maintainer  : domen.monik@gmail.com
+Maintainer  : domen.monik@gmail.com, matej.aleksandrov@gmail.com
 Stability   : experimental
 Portability : POSIX
 
@@ -29,7 +29,7 @@ tFold = ("(a -> b -> b) -> b -> [a] -> b", "fold")
 
 -- | Filter.
 tFilter :: (String, String)
-tFilter :: ("(a -> Bool) -> [a] -> [a]", "filter")
+tFilter = ("(a -> Bool) -> [a] -> [a] ", "filter")
 
 -- | Map.
 tMap :: (String, String)
