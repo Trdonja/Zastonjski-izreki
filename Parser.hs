@@ -18,7 +18,7 @@ module Parser where
 
 import Data.Maybe
 import Data.Char
-import Zastonjski
+import TheoremGenerator
 
 -- * Glavna funkcija parse
 
