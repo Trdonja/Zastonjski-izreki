@@ -6,6 +6,12 @@
 \setlength\parindent{0pt}
 \usetheme{Warsaw}
 
+\newcommand{\blue}[1]{\textcolor[rgb]{0,0,1}{#1}}
+\newcommand{\red}[1]{\textcolor[rgb]{1,0,0}{#1}}
+\newcommand{\orange}[1]{\textcolor[rgb]{1,0.41,0.13}{#1}}
+\newcommand{\green}[1]{\textcolor[rgb]{0.2,0.8,0.2}{#1}}
+\newcommand{\grey}[1]{\textcolor[rgb]{0.75,0.75,0.75}{#1}}
+
 
 \begin{document}
 
@@ -16,16 +22,16 @@
 \texttt{
 {\footnotesize type TypeVariable = String}
 \begin{block}{\texttt{data Type}}
-\textcolor[rgb]{0,0,1}{\textbf{TypeVar}} \textcolor[rgb]{1,0,0}{TypeVariable} 
+\blue{\textbf{TypeVar}} \red{TypeVariable} 
 \hfill{\small\sffamily spremenljivka} \\
 $\qquad${\small a, b, x, y, ...} \\
-\textcolor[rgb]{0,0,1}{\textbf{TypeConst}} \textcolor[rgb]{1,0,0}{TypeVariable}
+\blue{\textbf{TypeConst}} \red{TypeVariable}
 \hfill{\small\sffamily konstantni tip}\\
 $\qquad${\small Bool, Int, Double, Char, ...} \\
-\textcolor[rgb]{0,0,1}{\textbf{TypeFun}} \textcolor[rgb]{1,0,0}{Type Type}
+\blue{\textbf{TypeFun}} \red{Type Type}
 \hfill{\small\sffamily funkcija} \\
 $\qquad${\small a -> b, x -> Bool, [Int] -> Int, ...} \\
-\textcolor[rgb]{0,0,1}{\textbf{TypeList}} \textcolor[rgb]{1,0,0}{Type}
+\blue{\textbf{TypeList}} \red{Type}
 \hfill{\small\sffamily seznam} \\
 $\qquad${\small [a], [Int], [x -> y], ...} \\
 \end{block}
@@ -42,10 +48,10 @@ $\qquad${\small [a], [Int], [x -> y], ...} \\
 \texttt{
 {\footnotesize type TermVariable = String}
 \begin{block}{\texttt{data Term}}
-\textcolor[rgb]{0,0,1}{\textbf{TermVar}} \textcolor[rgb]{1,0,0}{TermVariable}
+\blue{\textbf{TermVar}} \red{TermVariable}
 \hfill{\small\sffamily spremenljivka} \\
 $\qquad${\small x, y, u, v, ...} \\
-\textcolor[rgb]{0,0,1}{\textbf{TermApp}} \textcolor[rgb]{1,0,0}{Term Term}
+\blue{\textbf{TermApp}} \red{Term Term}
 \hfill{\small\sffamily aplikacija izraza na izraz} \\
 $\qquad${\small f x, g (f y), ...} \\
 \end{block}
@@ -58,17 +64,17 @@ $\qquad${\small f x, g (f y), ...} \\
 \texttt{
 {\footnotesize type RelationVariable = String}
 \begin{block}{\texttt{data Formula}}
-\textcolor[rgb]{0,0,1}{\textbf{ForallRelations}} \textcolor[rgb]{1,0,0}{RelationVariable}\\
-$\phantom{\textbf{ForallRelations}}$ (\textcolor[rgb]{1,0,0}{TypeVariable}, \textcolor[rgb]{1,0,0}{TypeVariable})\\
-$\phantom{\textbf{ForallRelations}}$ \textcolor[rgb]{1,0,0}{Formula}\\
+\blue{\textbf{ForallRelations}} \red{RelationVariable}\\
+$\phantom{\textbf{ForallRelations}}$ (\red{TypeVariable}, \red{TypeVariable})\\
+$\phantom{\textbf{ForallRelations}}$ \red{Formula}\\
 $\qquad${\small $\forall\, \texttt{t}_1, \texttt{t}_2 \in \textsc{Types},\; \texttt{R} \subseteq \texttt{t}_1\times \texttt{t}_2\,$. (\textit{formula})}\\
-\textcolor[rgb]{0,0,1}{\textbf{ForallVariables}} \textcolor[rgb]{1,0,0}{TermVariable}
-\textcolor[rgb]{1,0,0}{Type} \textcolor[rgb]{1,0,0}{Formula}\\
+\blue{\textbf{ForallVariables}} \red{TermVariable}
+\red{Type} \red{Formula}\\
 $\qquad${\small $\forall$ n :: Int . (\textit{formula})}\\
 $\qquad${\small $\forall$ g :: $t_1$ -> $t_3$ . (\textit{formula})}\\
-\textcolor[rgb]{0,0,1}{\textbf{ForallPairs}} (\textcolor[rgb]{1,0,0}{TermVariable}, \textcolor[rgb]{1,0,0}{TermVariable})\\
-$\phantom{\textbf{ForallPairs}}$ \textcolor[rgb]{1,0,0}{RelationVariable}\\
-$\phantom{\textbf{ForallPairs}}$ \textcolor[rgb]{1,0,0}{Formula}\\
+\blue{\textbf{ForallPairs}} (\red{TermVariable}, \red{TermVariable})\\
+$\phantom{\textbf{ForallPairs}}$ \red{RelationVariable}\\
+$\phantom{\textbf{ForallPairs}}$ \red{Formula}\\
 $\qquad${\small $\forall$ (x, y) $\in$ R. (\textit{formula})}\\
 $\qquad${\small $\forall$ (u, v) $\in$ [R -> S]. (\textit{formula})}\\
 \end{block}
@@ -81,12 +87,12 @@ $\qquad${\small $\forall$ (u, v) $\in$ [R -> S]. (\textit{formula})}\\
 \texttt{
 \begin{block}{\texttt{data Formula}}
 $\vdots$\\
-\textcolor[rgb]{0,0,1}{\textbf{IsMember}} (\textcolor[rgb]{1,0,0}{Term}, \textcolor[rgb]{1,0,0}{Term}) \textcolor[rgb]{1,0,0}{RelationVariable}\\
+\blue{\textbf{IsMember}} (\red{Term}, \red{Term}) \red{RelationVariable}\\
 $\qquad${\small (u, v) $\in$ R}\\
 $\qquad${\small (g x, g y) $\in$ S}\\
-\textcolor[rgb]{0,0,1}{\textbf{Implication}} \textcolor[rgb]{1,0,0}{Formula Formula}\\
+\blue{\textbf{Implication}} \red{Formula Formula}\\
 $\qquad${\small (\textit{formula}${}_1$) $\Rightarrow$ (\textit{formula}${}_2$)}\\
-\textcolor[rgb]{0,0,1}{\textbf{Equivalence}} \textcolor[rgb]{1,0,0}{Term Term}\\
+\blue{\textbf{Equivalence}} \red{Term Term}\\
 $\qquad${\small x = y}\\
 $\qquad${\small f x = g y}\\
 \end{block}
@@ -102,11 +108,11 @@ $\qquad${\small f x = g y}\\
 \item Vsaki spremenljivki priredi par tipovnih spremenljivk ter relacijsko spremenljivko.\\
 Sestavi začetek formule:\\
 $\quad\forall\, \texttt{t}_1, \texttt{t}_2 \in \textsc{Types},\; \texttt{R} \subseteq \texttt{t}_1\times \texttt{t}_2\,$.
-\hfill\textcolor[rgb]{0.75,0.75,0.75}{$\leftarrow$ pripada \texttt{a}}\\
+\hfill\grey{$\leftarrow$ pripada \texttt{a}}\\
 $\quad\quad\forall\, \texttt{t}_3, \texttt{t}_4 \in \textsc{Types},\; \texttt{S} \subseteq \texttt{t}_3\times \texttt{t}_4\,$.
-\hfill\textcolor[rgb]{0.75,0.75,0.75}{$\leftarrow$ pripada \texttt{b}}\\
+\hfill\grey{$\leftarrow$ pripada \texttt{b}}\\
 $\quad\quad\quad\forall\, \texttt{t}_5, \texttt{t}_6 \in \textsc{Types},\; \texttt{T} \subseteq \texttt{t}_5\times \texttt{t}_6\,$.
-\hfill\textcolor[rgb]{0.75,0.75,0.75}{$\leftarrow$ pripada \texttt{c}}
+\hfill\grey{$\leftarrow$ pripada \texttt{c}}
 \end{itemize}
 \end{frame}
 
@@ -117,21 +123,21 @@ $\quad\quad\quad\forall\, \texttt{t}_5, \texttt{t}_6 \in \textsc{Types},\; \text
 \begin{block}{}
 formula :: Term -> Term -> Type -> Formula
 \end{block}
-formula term${}_1$ term${}_2$ type = \textcolor[rgb]{0,0,1}{case} type \textcolor[rgb]{0,0,1}{of}
+formula term${}_1$ term${}_2$ type = \blue{case} type \blue{of}
 \begin{itemize}
-\item TypeVar \textcolor[rgb]{0.2,0.8,0.2}{a} $\longmapsto$ IsMember (term${}_1$, term${}_2$) \textcolor[rgb]{1,0.41,0.13}{R${}_a$}\\
-$\quad${\footnotesize \textcolor[rgb]{1,0.41,0.13}{R${}_a$} {\sffamily osnovna relacija, ki pripada spremenljivki} \textcolor[rgb]{0.2,0.8,0.2}{a}}
-\item TypeConst \textcolor[rgb]{0.2,0.8,0.2}{c} $\longmapsto$ Equivalence term${}_1$ term${}_2$ %po izreku o parametričnosti
-\item TypeList t $\longmapsto$ IsMember (term${}_1$, term${}_2$) \textcolor[rgb]{1,0.41,0.13}{[Rel${}_t$]}\\
+\item TypeVar \green{a} $\longmapsto$ IsMember (term${}_1$, term${}_2$) \orange{R${}_a$}\\
+$\quad${\footnotesize \orange{R${}_a$} {\sffamily osnovna relacija, ki pripada spremenljivki} \green{a}}
+\item TypeConst \green{c} $\longmapsto$ Equivalence term${}_1$ term${}_2$ %po izreku o parametričnosti
+\item TypeList t $\longmapsto$ IsMember (term${}_1$, term${}_2$) \orange{[Rel${}_t$]}\\
 {\footnotesize
-$\quad$\textcolor[rgb]{1,0.41,0.13}{[Rel${}_t$]} {\sffamily sestavljena relacija, ki pripada tipu t}\\
-$\quad\;$\textcolor[rgb]{1,0.41,0.13}{Rel${}_t$} = \textcolor[rgb]{0,0,1}{case} t \textcolor[rgb]{0,0,1}{of}\\
-$\quad\quad$TypeVar \textcolor[rgb]{0.2,0.8,0.2}{a} $\rightarrow$ {\sffamily osnovna relacija, ki pripada sprem. }\textcolor[rgb]{0.2,0.8,0.2}{a}\\
-$\quad\quad$TypeConst \textcolor[rgb]{0.2,0.8,0.2}{c} $\rightarrow$ \textcolor[rgb]{1,0.41,0.13}{Id${}_{\mathtt{c}}$}
-$\quad$npr. \textcolor[rgb]{1,0.41,0.13}{Id${}_{\mathtt{Bool}}$}, \textcolor[rgb]{1,0.41,0.13}{Id${}_{\mathtt{Double}}$}, ...\\
-$\quad\quad$TypeList ty $\rightarrow$ \textcolor[rgb]{1,0.41,0.13}{[} {\sffamily sestavljena relacija, ki pripada tipu }ty 
-\textcolor[rgb]{1,0.41,0.13}{]}\\
-$\quad\quad$TypeFun t${}_1$ t${}_2$ $\rightarrow$ ({\sffamily sestavljena relacija, ki pripada tipu }t${}_1$) \textcolor[rgb]{1,0.41,0.13}{->}\\
+$\quad$\orange{[Rel${}_t$]} {\sffamily sestavljena relacija, ki pripada tipu t}\\
+$\quad\;$\orange{Rel${}_t$} = \blue{case} t \blue{of}\\
+$\quad\quad$TypeVar \green{a} $\rightarrow$ {\sffamily osnovna relacija, ki pripada sprem. }\green{a}\\
+$\quad\quad$TypeConst \green{c} $\rightarrow$ \orange{Id${}_{\mathtt{c}}$}
+$\quad$npr. \orange{Id${}_{\mathtt{Bool}}$}, \orange{Id${}_{\mathtt{Double}}$}, ...\\
+$\quad\quad$TypeList ty $\rightarrow$ \orange{[} {\sffamily sestavljena relacija, ki pripada tipu }ty 
+\orange{]}\\
+$\quad\quad$TypeFun t${}_1$ t${}_2$ $\rightarrow$ ({\sffamily sestavljena relacija, ki pripada tipu }t${}_1$) \orange{->}\\
 $\quad\quad$\phantom{TypeFun t${}_1$ t${}_2$ $\rightarrow$ }({\sffamily sestavljena relacija, ki pripada tipu }t${}_2$)
 }
 \end{itemize}
@@ -145,17 +151,17 @@ $\quad\quad$\phantom{TypeFun t${}_1$ t${}_2$ $\rightarrow$ }({\sffamily sestavlj
 \begin{block}{}
 formula :: Term -> Term -> Type -> Formula
 \end{block}
-formula term${}_1$ term${}_2$ type = \textcolor[rgb]{0,0,1}{case} type \textcolor[rgb]{0,0,1}{of}
+formula term${}_1$ term${}_2$ type = \blue{case} type \blue{of}
 \begin{itemize}
-\item TypeFun (TypeVar \textcolor[rgb]{0.2,0.8,0.2}{a}) b $\longmapsto$ \\
-\textcolor[rgb]{0,0,1}{let} (\textcolor[rgb]{0.2,0.8,0.2}{x}, \textcolor[rgb]{0.2,0.8,0.2}{y}) $\leftarrow$ generator \ 
-{\footnotesize\sffamily \textcolor[rgb]{0.75,0.75,0.75}{generira spremenljivki za nova izraza}}\\
-$\phantom{let\ }$ \textcolor[rgb]{1,0.41,0.13}{R${}_{\mathtt{a}}$} = {\sffamily osnovna relacija, ki pripada sprem. }\textcolor[rgb]{0.2,0.8,0.2}{a}\\
+\item TypeFun (TypeVar \green{a}) b $\longmapsto$ \\
+\blue{let} (\green{x}, \green{y}) $\leftarrow$ generator \ 
+{\footnotesize\sffamily \grey{generira spremenljivki za nova izraza}}\\
+$\phantom{let\ }$ \orange{R${}_{\mathtt{a}}$} = {\sffamily osnovna relacija, ki pripada sprem. }\green{a}\\
 $\phantom{let\ }$ nextFormula = formula\\
-$\qquad\quad$ (TermApp term${}_1$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{x}))\\
-$\qquad\quad$ (TermApp term${}_2$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{y})) \\ $\qquad\quad$ b \\
-\textcolor[rgb]{0,0,1}{in\ } ForallPairs (\textcolor[rgb]{0.2,0.8,0.2}{x}, \textcolor[rgb]{0.2,0.8,0.2}{y})
-\textcolor[rgb]{1,0.41,0.13}{R${}_{\mathtt{a}}$} nextFormula
+$\qquad\quad$ (TermApp term${}_1$ (TermVar \green{x}))\\
+$\qquad\quad$ (TermApp term${}_2$ (TermVar \green{y})) \\ $\qquad\quad$ b \\
+\blue{in\ } ForallPairs (\green{x}, \green{y})
+\orange{R${}_{\mathtt{a}}$} nextFormula
 \end{itemize}
 }
 \end{frame}
@@ -167,16 +173,16 @@ $\qquad\quad$ (TermApp term${}_2$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{y})) \\ 
 \begin{block}{}
 formula :: Term -> Term -> Type -> Formula
 \end{block}
-formula term${}_1$ term${}_2$ type = \textcolor[rgb]{0,0,1}{case} type \textcolor[rgb]{0,0,1}{of}
+formula term${}_1$ term${}_2$ type = \blue{case} type \blue{of}
 \begin{itemize}
-\item TypeFun (TypeConst \textcolor[rgb]{0.2,0.8,0.2}{c}) b $\longmapsto$ \\
-\textcolor[rgb]{0,0,1}{let} \textcolor[rgb]{0.2,0.8,0.2}{z} $\leftarrow$ generator \ 
-{\footnotesize\sffamily \textcolor[rgb]{0.75,0.75,0.75}{generira spremenljivko za nov izraz}}\\
+\item TypeFun (TypeConst \green{c}) b $\longmapsto$ \\
+\blue{let} \green{z} $\leftarrow$ generator \ 
+{\footnotesize\sffamily \grey{generira spremenljivko za nov izraz}}\\
 $\phantom{let\ }$ nextFormula = formula\\
-$\qquad\quad$ (TermApp term${}_1$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{z}))\\
-$\qquad\quad$ (TermApp term${}_2$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{z})) \\ $\qquad\quad$ b \\
-\textcolor[rgb]{0,0,1}{in\ } ForallVariables \textcolor[rgb]{0.2,0.8,0.2}{z}
-(TypeConst \textcolor[rgb]{0.2,0.8,0.2}{c}) nextFormula
+$\qquad\quad$ (TermApp term${}_1$ (TermVar \green{z}))\\
+$\qquad\quad$ (TermApp term${}_2$ (TermVar \green{z})) \\ $\qquad\quad$ b \\
+\blue{in\ } ForallVariables \green{z}
+(TypeConst \green{c}) nextFormula
 \end{itemize}
 }
 \end{frame}
@@ -188,17 +194,17 @@ $\qquad\quad$ (TermApp term${}_2$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{z})) \\ 
 \begin{block}{}
 formula :: Term -> Term -> Type -> Formula
 \end{block}
-formula term${}_1$ term${}_2$ type = \textcolor[rgb]{0,0,1}{case} type \textcolor[rgb]{0,0,1}{of}
+formula term${}_1$ term${}_2$ type = \blue{case} type \blue{of}
 \begin{itemize}
 \item TypeFun (TypeList ty) b $\longmapsto$ \\
-\textcolor[rgb]{0,0,1}{let} (\textcolor[rgb]{0.2,0.8,0.2}{u}, \textcolor[rgb]{0.2,0.8,0.2}{v}) $\leftarrow$ generator \ 
-{\footnotesize\sffamily \textcolor[rgb]{0.75,0.75,0.75}{generira spremenljivki za nova izraza}}\\
-$\phantom{let\ }$ \textcolor[rgb]{1,0.41,0.13}{[R${}_{\mathtt{ty}}$]} = {\sffamily sestavljena relacija, ki pripada tipu } [ty]\\
+\blue{let} (\green{u}, \green{v}) $\leftarrow$ generator \ 
+{\footnotesize\sffamily \grey{generira spremenljivki za nova izraza}}\\
+$\phantom{let\ }$ \orange{[R${}_{\mathtt{ty}}$]} = {\sffamily sestavljena relacija, ki pripada tipu } [ty]\\
 $\phantom{let\ }$ nextFormula = formula\\
-$\qquad\quad$ (TermApp term${}_1$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{u}))\\
-$\qquad\quad$ (TermApp term${}_2$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{v})) \\ $\qquad\quad$ b \\
-\textcolor[rgb]{0,0,1}{in\ } ForallPairs (\textcolor[rgb]{0.2,0.8,0.2}{u}, \textcolor[rgb]{0.2,0.8,0.2}{v})
-\textcolor[rgb]{1,0.41,0.13}{[R${}_{\mathtt{ty}}$]} nextFormula
+$\qquad\quad$ (TermApp term${}_1$ (TermVar \green{u}))\\
+$\qquad\quad$ (TermApp term${}_2$ (TermVar \green{v})) \\ $\qquad\quad$ b \\
+\blue{in\ } ForallPairs (\green{u}, \green{v})
+\orange{[R${}_{\mathtt{ty}}$]} nextFormula
 \end{itemize}
 }
 \end{frame}
@@ -212,21 +218,21 @@ $R\rightarrow S =\{(g,h)\, |\, g :: t_1\rightarrow t_3, h :: t_2\rightarrow t_4\
 %\begin{block}{}
 %formula :: Term -> Term -> Type -> Formula
 %\end{block}
-%formula term${}_1$ term${}_2$ type = \textcolor[rgb]{0,0,1}{case} type \textcolor[rgb]{0,0,1}{of}
+%formula term${}_1$ term${}_2$ type = \blue{case} type \blue{of}
 \begin{itemize}
 \item TypeFun a b $\longmapsto$ \\
-\textcolor[rgb]{0,0,1}{let} (\textcolor[rgb]{0.2,0.8,0.2}{g}, \textcolor[rgb]{0.2,0.8,0.2}{h}) $\leftarrow$ generator \ 
-{\footnotesize\sffamily \textcolor[rgb]{0.75,0.75,0.75}{spremenljivki za novi funkciji}}\\
+\blue{let} (\green{g}, \green{h}) $\leftarrow$ generator \ 
+{\footnotesize\sffamily \grey{spremenljivki za novi funkciji}}\\
 $\phantom{let\ }$ R = {\sffamily sestavljena relacija, ki pripada tipu } a -> b\\
 $\phantom{let\ }$ leftFunctionType = {\sffamily levi funkcijski tip relacije } R\\
 $\phantom{let\ }$ rightFunctionType = {\sffamily desni funkcijski tip relacije } R\\
 $\phantom{let\ }$ fstFormula = formula\\
-$\qquad\quad$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{g}, TermVar \textcolor[rgb]{0.2,0.8,0.2}{h}) a \\
+$\qquad\quad$ (TermVar \green{g}, TermVar \green{h}) a \\
 $\phantom{let\ }$ sndFormula = formula\\
-$\qquad\quad$ (TermApp term${}_1$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{g}))\\
-$\qquad\quad$ (TermApp term${}_2$ (TermVar \textcolor[rgb]{0.2,0.8,0.2}{h})) \\ $\qquad\quad$ b \\
-\textcolor[rgb]{0,0,1}{in\ } ForallVariables \textcolor[rgb]{0.2,0.8,0.2}{g} leftFunctionType \$ \\
-$\phantom{in\ }\quad$ ForallVariables \textcolor[rgb]{0.2,0.8,0.2}{h} rightFunctionType \$ \\
+$\qquad\quad$ (TermApp term${}_1$ (TermVar \green{g}))\\
+$\qquad\quad$ (TermApp term${}_2$ (TermVar \green{h})) \\ $\qquad\quad$ b \\
+\blue{in\ } ForallVariables \green{g} leftFunctionType \$ \\
+$\phantom{in\ }\quad$ ForallVariables \green{h} rightFunctionType \$ \\
 $\phantom{in\ }\quad\quad$ Implication fstFormula sndFormula \\
 \end{itemize}
 }
