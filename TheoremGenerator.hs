@@ -114,7 +114,8 @@ data Formula
 instance Show Formula where
     show f = toString f 0 where
         toString formul n = case formul of
-            ForallRelations rv (tv1, tv2) fml -> "Forall " ++ rv ++ " between " ++ tv1 ++ " x " ++ tv2 ++ ".\n" ++ (replicate (n+2) ' ') ++ (toString fml $ n+2)
+            ForallRelations rv (tv1, tv2) fml -> "Forall " ++ tv1 ++ ", " ++ tv2 ++ " in TYPES, " ++ rv ++ " in REL(" ++ tv1 ++ ", " ++ tv2 ++ ").\n"
+                                                 ++ (replicate (n+2) ' ') ++ (toString fml $ n+2)
             ForallVariables tv ty fml -> "Forall " ++ tv ++ " :: " ++ (show ty) ++ ".\n" ++ (replicate (n+2) ' ') ++ (toString fml $ n+2)
             ForallPairs (tv1, tv2) rv fml -> "Forall (" ++ tv1 ++ ", " ++ tv2 ++ ") in " ++ rv ++ "." ++
                                              case fml of
@@ -142,7 +143,17 @@ instance Show Theorem where
 
 -- | Shramba spremenljivk za relacije.
 
-relVarStore = ["R","S","T","U","V","Z"]
+relVarStore = [x ++ n | n <- "" : map show [1..], x <- ["R","S","T","U","V","Z"]]
+
+
+-- | Shramba spremenljivk za funkcije.
+
+functionVariableStore = [x ++ n | n <- "" : map show [1..], x <- ["p","q","r","s","g","h"]]
+
+
+-- | Shramba spremenljivk za izraze.
+
+termVariableStore = [x ++ n | n <- "" : map show [1..], x <- ["x","y","u","v","w","z","a","b","c","d","m","n"]]
 
 
 -- | Generator spremenljivk za funkcije in izrazre.
@@ -231,7 +242,7 @@ theorem ty tyName = Theorem { theoremFormula = fold relations (fst $ formula (Te
     assocListRelVar typ =
         case typ of
             TypeVar v -> assocRelVar v
-            TypeConst c -> "id_" ++ c
+            TypeConst c -> "Id_" ++ c
             TypeList t -> "[" ++ (assocListRelVar t) ++ "]"
             TypeFun a b -> (assocListRelVar a) ++ " -> " ++ (assocListRelVar b)
     
@@ -256,8 +267,8 @@ theorem ty tyName = Theorem { theoremFormula = fold relations (fst $ formula (Te
     
     -- Generator spremenljivk za funkcije in izraze.
     varGenerator :: VarGenerator
-    varGenerator = VarGenerator { funVarStore = ["p","q","r","s","g","h","k","l","i","j","t","o"] -- Shramba spremenljivk za funkcije
-                                , termVarStore = ["x","y","u","v","w","z","a","b","c","d","m","n"] -- Shramba spremenljivk za izraze
+    varGenerator = VarGenerator { funVarStore = functionVariableStore -- Shramba spremenljivk za funkcije
+                                , termVarStore = termVariableStore -- Shramba spremenljivk za izraze
                                 }
     
     -- Za podani par izrazov, ki pripada relaciji podanega tipa, vrne formulo.
