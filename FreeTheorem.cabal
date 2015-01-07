@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                FreeTheorem
-version:             1.0.0.0
+version:             0.1.0.0
 synopsis:            Generator zastonjskih izrekov
 -- description:         
 homepage:            https://github.com/Trdonja/Zastonjski-izreki
@@ -16,8 +16,8 @@ build-type:          Simple
 extra-source-files:  README.md
 cabal-version:       >=1.10
 
-library
-  exposed-modules:     Parser, FreeTheorem, Primeri, TheoremGenerator
+executable FreeTheorem
+  main-is:             FreeTheorem.hs
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base >=4.7 && <4.8
