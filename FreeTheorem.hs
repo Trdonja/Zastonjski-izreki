@@ -25,12 +25,13 @@ main = do
     ime <- getLine    -- ^ Prebere ime predpisa.
     putStrLn "Vpiši predpis tipa:"
     predpis <- getLine       -- ^ Prebere predpis, ki ga podamo v standardnem vhodu.
-    putStrLn (odgovor (parse predpis) ime) -- ^ Izpiše izrek oziroma sporoči napako.
+    odgovor (predpis, ime) -- ^ Izpiše izrek oziroma sporoči napako.
 
 -- | Funkcija, ki vrne odgovor.
 
-odgovor :: Maybe Type -> String -> String
-odgovor tip ime
-   | isNothing tip = "Vnos je napačen."
-   | otherwise   = "\nIzrek za " ++ ime ++ " :: " ++ (show (fromJust tip)) ++ ":\n\n" ++ (show izrek)
+odgovor :: (String,String) -> IO()
+odgovor (predpis,ime)
+   | isNothing tip =  putStrLn "Vnos je napačen."
+   | otherwise   =  putStrLn ("\nIzrek za " ++ ime ++ " :: " ++ (show (fromJust tip)) ++ ":\n\n" ++ (show izrek))
    where izrek = theorem ( fromJust tip) ime
+         tip=parse predpis

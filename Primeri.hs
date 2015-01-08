@@ -15,6 +15,8 @@ Leva komponenta para je predstavitev tipa v nizu, desna komponenta pa je ime tip
 
 module Primeri where
 
+-- ^ Primere se testira z: odgovor tPrimer.
+
 -- | Aplikacija.
 tApplication :: (String, String)
 tApplication = ("(a -> b) -> a -> b", "app")
@@ -35,10 +37,18 @@ tFilter = ("(a -> Bool) -> [a] -> [a] ", "filter")
 tMap :: (String, String)
 tMap = ("(a -> b) -> [a] -> [b]", "map")
 
--- | Konkatenacija
+-- | Konkatenacija.
 tConcat :: (String, String)
 tConcat = ("[[a]] -> [a]", "concat")
 
 -- | Izmišljena 1.
 tIzm :: (String, String)
 tIzm = ("x -> (y -> [x -> [y]]) -> y", "f")
+
+-- | Reverse.
+tReverse :: (String, String)
+tReverse = ("[x] -> [x]", "reverse")
+
+-- | Sort.
+tSort :: (String, String)
+tSort = ("(a -> a -> Bool) -> ([a] -> [a])", "reverse")
