@@ -31,33 +31,34 @@ Matej Aleksandrov}
 	%Osnovna ideja:
 	%\\
 	\begin{center}
-	Polimorfna funkcija $\rightarrow$ izrek
+	Tip polimorfne funkcije $\rightarrow$ izrek
 	\end{center}
 	\pause
 	Primer:
 	\\
 	$$f: \forall X .\mbox{ } X^* \rightarrow X^*$$
+	\pause
 	Potem za vsak $a: A \rightarrow A'$ velja izrek:
 	$$  a^* \circ f_{A} = f_{A'} \circ a $$
 	\end{frame}
 	
 	\begin{frame}
 	\frametitle{Parametričnost}
-		Funkcijo $f:A \to A'$ lahko predstavimo kot relacijo $\mathcal{A} \subseteq A \times A'$, kjer velja $(x,x')\in \mathcal{A} \Leftrightarrow  f(x)=x'$.\\
-		\pause
-		Konstruktorji tipov:
+		Funkcijo $f:A \to A'$ lahko predstavimo kot relacijo $\mathcal{A} \subseteq A \times A'$, kjer velja $(x,x')\in \mathcal{A} \Leftrightarrow  f(x)=x'$.\\ \pause
+		Konstruktorji tipov:\pause
 		\begin{itemize}
 		\item $\mathcal{A}\times \mathcal{B} \subseteq (A \times B) \times (A' \times B')$:
-		$$ ((x,y),(x',y') \in \mathcal{A}\times \mathcal{B} \Leftrightarrow (x,x') \in \mathcal{A} \mbox{ in } (y,y') \in \mathcal{B} $$
+		 \begin{center} $((x,y),(x',y') \in \mathcal{A}\times \mathcal{B} \Leftrightarrow (x,x') \in \mathcal{A} \mbox{ in } (y,y') \in \mathcal{B} $ \end{center} \pause
 		\item $\mathcal{A}^* \subseteq A^* \times A'^*$:
-		$$ ([x_1, \ldots, x_n],[x'_1, \ldots, x'_n]) \in \mathcal{A}^* \Leftrightarrow (x_1,x'_1) \in \mathcal{A},  \ldots  (x_n,x_n') \in \mathcal{A} $$
+		$$ ([x_1, \ldots, x_n],[x'_1, \ldots, x'_n]) \in \mathcal{A}^* \Leftrightarrow (x_1,x'_1) \in \mathcal{A},  \ldots  (x_n,x_n') \in \mathcal{A} $$ \pause
+		\vspace{-0.5cm}
 		\item $\mathcal{A}\to \mathcal{B} \subseteq (A \to B) \times (A' \to B')$:
-		$$ (f,f') \in \mathcal{A}\to \mathcal{B} \Leftrightarrow  \forall (x,x') \in \mathcal{A}.\mbox{ } (f(x),f'(x')) \in \mathcal{B} $$
+		 \begin{center} $ (f,f') \in \mathcal{A}\to \mathcal{B} \Leftrightarrow  \forall (x,x') \in \mathcal{A}.\mbox{ } (f(x),f'(x')) \in \mathcal{B} $  \end{center} \pause
 		\item $\forall \mathcal{X}.\mbox{ } \mathcal{K}(\mathcal{X}) \subseteq \forall X.\mbox{ } K(X) \times \forall X.\mbox{ } K'(X) $:
-		$$ (g,g') \in \forall \mathcal{X}.\mbox{ } \mathcal{K}(\mathcal{X})  \Leftrightarrow  \forall \mathcal{A} \subseteq (A,A').\mbox{ } (g_A,g'_{A'}) \in \mathcal{F}(\mathcal{A})$$
+		 \begin {center}$ (g,g') \in \forall \mathcal{X}.\mbox{ } \mathcal{K}(\mathcal{X})  \Leftrightarrow  \forall \mathcal{A} \subseteq (A,A').\mbox{ } (g_A,g'_{A'}) \in \mathcal{F}(\mathcal{A})$  \end{center}
 		\end{itemize}
+\pause
 	Konstantne tipe (Int, Bool, Char,...) predstavimo z identično relacijo.
-	
 	\end{frame}
 	
 	\begin{frame}
@@ -68,12 +69,12 @@ Matej Aleksandrov}
 	\vspace{1cm}
 	Začetni primer:
 	\begin{eqnarray*}
-	& f: \forall X .\mbox{ } X^* \rightarrow X^* \\
+	& f: \forall X .\mbox{ } X^* \rightarrow X^* \\ \pause
 	\\
-	\Rightarrow & (f,f) \in \forall \mathcal{X} .\mbox{ } \mathcal{X}^* \rightarrow \mathcal{X}^* \\
-	\Rightarrow & \forall \mathcal{A} \subseteq (A,A'). \mbox{ } (f_A,f'_{A'}) \in \mathcal{A}^* \to \mathcal{A}^* \\
-	\Rightarrow & \forall \mathcal{A} \subseteq (A,A').\mbox{ }  \forall (xs,xs') \in \mathcal{A}^* . \mbox{ } (f_A (xs),f'_{A'}( xs')) \in \mathcal{A}^* \\
-	\Rightarrow & \forall a : A \to A' . \mbox{ } \forall xs \in A^* . \mbox{ } a*(xs)=xs' \Rightarrow a*(f_A(xs)) = f_{A'}(xs') \\
+	\Rightarrow & (f,f) \in \forall \mathcal{X} .\mbox{ } \mathcal{X}^* \rightarrow \mathcal{X}^* \\ \pause
+	\Rightarrow & \forall \mathcal{A} \subseteq (A,A'). \mbox{ } (f_A,f'_{A'}) \in \mathcal{A}^* \to \mathcal{A}^* \\ \pause
+	\Rightarrow & \forall \mathcal{A} \subseteq (A,A').\mbox{ }  \forall (xs,xs') \in \mathcal{A}^* . \mbox{ } (f_A (xs),f'_{A'}( xs')) \in \mathcal{A}^* \\ \pause
+	\Rightarrow & \forall a : A \to A' . \mbox{ } \forall xs \in A^* . \mbox{ } a*(xs)=xs' \Rightarrow a*(f_A(xs)) = f_{A'}(xs') \\ \pause
 	\Rightarrow & \forall a : A \to A' .  \mbox{ } a^* \circ f_{A} = f_{A'} \circ a \\
 	\end{eqnarray*}
 	
@@ -166,6 +167,39 @@ $\qquad${\small f x = g y}\\
 \end{block}
 }
 \end{frame}
+
+
+\begin{frame}
+Viri:
+\begin{itemize}
+\item P.~Walder, \emph{Theorems for Free!}, dostopno na \url{http://ttic.uchicago.edu/~dreyer/course/papers/wadler.pdf}.
+\item J.~ Voigtlander, \emph{Free Theorems Involving Type Constructor Classes}, dostopno na \url{http://www.janis-voigtlaender.eu/papers/FreeTheoremsInvolvingTypeConstructorClasses.pdf}.
+\item \emph{Automatic generation of free theoremss}, dostopno na \url{http://www-ps.iai.uni-bonn.de/cgi-bin/free-theorems-webui.cgi}.
+\end{itemize}
+\end{frame}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\begin{comment}
 
 \begin{frame}
 \frametitle{Generiranje izreka}
@@ -306,5 +340,6 @@ $\phantom{in\ }\quad\quad$ Implication fstFormula sndFormula \\
 }
 \end{frame}
 
+\end{comment}
 
 \end{document}
