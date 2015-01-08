@@ -12,13 +12,79 @@
 \newcommand{\green}[1]{\textcolor[rgb]{0.2,0.8,0.2}{#1}}
 \newcommand{\grey}[1]{\textcolor[rgb]{0.75,0.75,0.75}{#1}}
 
+\newtheorem{izrekparam}{Izrek parametričnosti}
+
+\title{Zastonjski izreki}
+\author{Domen Močnik\\
+Matej Aleksandrov}
+\date{Ljubljana, 8. januar 2015}
 
 \begin{document}
 
 \begin{frame}
+	\titlepage
+	\end{frame}
+	
+	
+	\begin{frame}
+	\frametitle{Osnovna ideja}
+	%Osnovna ideja:
+	%\\
+	\begin{center}
+	Polimorfna funkcija $\rightarrow$ izrek
+	\end{center}
+	\pause
+	Primer:
+	\\
+	$$f: \forall X .\mbox{ } X^* \rightarrow X^*$$
+	Potem za vsak $a: A \rightarrow A'$ velja izrek:
+	$$  a^* \circ f_{A} = f_{A'} \circ a $$
+	\end{frame}
+	
+	\begin{frame}
+	\frametitle{Parametričnost}
+		Funkcijo $f:A \to A'$ lahko predstavimo kot relacijo $\mathcal{A} \subseteq A \times A'$, kjer velja $(x,x')\in \mathcal{A} \Leftrightarrow  f(x)=x'$.\\
+		\pause
+		Konstruktorji tipov:
+		\begin{itemize}
+		\item $\mathcal{A}\times \mathcal{B} \subseteq (A \times B) \times (A' \times B')$:
+		$$ ((x,y),(x',y') \in \mathcal{A}\times \mathcal{B} \Leftrightarrow (x,x') \in \mathcal{A} \mbox{ in } (y,y') \in \mathcal{B} $$
+		\item $\mathcal{A}^* \subseteq A^* \times A'^*$:
+		$$ ([x_1, \ldots, x_n],[x'_1, \ldots, x'_n]) \in \mathcal{A}^* \Leftrightarrow (x_1,x'_1) \in \mathcal{A},  \ldots  (x_n,x_n') \in \mathcal{A} $$
+		\item $\mathcal{A}\to \mathcal{B} \subseteq (A \to B) \times (A' \to B')$:
+		$$ (f,f') \in \mathcal{A}\to \mathcal{B} \Leftrightarrow  \forall (x,x') \in \mathcal{A}.\mbox{ } (f(x),f'(x')) \in \mathcal{B} $$
+		\item $\forall \mathcal{X}.\mbox{ } \mathcal{K}(\mathcal{X}) \subseteq \forall X.\mbox{ } K(X) \times \forall X.\mbox{ } K'(X) $:
+		$$ (g,g') \in \forall \mathcal{X}.\mbox{ } \mathcal{K}(\mathcal{X})  \Leftrightarrow  \forall \mathcal{A} \subseteq (A,A').\mbox{ } (g_A,g'_{A'}) \in \mathcal{F}(\mathcal{A})$$
+		\end{itemize}
+	Konstantne tipe (Int, Bool, Char,...) predstavimo z identično relacijo.
+	
+	\end{frame}
+	
+	\begin{frame}
+	\begin{izrekparam}
+	Naj bo $\mathcal{T} \subseteq T \times T$ poljubna relacija zaprtega tipa $T$ in $t\in T$. Potem je $(t,t) \in \mathcal{T}$.
+	\end{izrekparam}
+	\pause
+	\vspace{1cm}
+	Začetni primer:
+	\begin{eqnarray*}
+	& f: \forall X .\mbox{ } X^* \rightarrow X^* \\
+	\\
+	\Rightarrow & (f,f) \in \forall \mathcal{X} .\mbox{ } \mathcal{X}^* \rightarrow \mathcal{X}^* \\
+	\Rightarrow & \forall \mathcal{A} \subseteq (A,A'). \mbox{ } (f_A,f'_{A'}) \in \mathcal{A}^* \to \mathcal{A}^* \\
+	\Rightarrow & \forall \mathcal{A} \subseteq (A,A').\mbox{ }  \forall (xs,xs') \in \mathcal{A}^* . \mbox{ } (f_A (xs),f'_{A'}( xs')) \in \mathcal{A}^* \\
+	\Rightarrow & \forall a : A \to A' . \mbox{ } \forall xs \in A^* . \mbox{ } a*(xs)=xs' \Rightarrow a*(f_A(xs)) = f_{A'}(xs') \\
+	\Rightarrow & \forall a : A \to A' .  \mbox{ } a^* \circ f_{A} = f_{A'} \circ a \\
+	\end{eqnarray*}
+	
+	\end{frame}	
+
+
+\begin{frame}
 \frametitle{Podatkovne strukture}
-\framesubtitle{Tip}
+%\framesubtitle{Tip}
 % Iz katerih podatkovnih struktur gradimo Zastonjske izreke?
+Tip:\\
 \texttt{
 {\footnotesize type TypeVariable = String}
 \begin{block}{\texttt{data Type}}
@@ -40,11 +106,12 @@ $\qquad${\small [a], [Int], [x -> y], ...} \\
 
 \begin{frame}
 \frametitle{Podatkovne strukture}
-\framesubtitle{Izraz}
+%\framesubtitle{Izraz}
 % Izrazi pripadajo tipom.
 % Konstantni izrazi so npr True, 2, "whoa", 'b', 3.14, ...
 % Lahko so spremenljivke.
 % Lahko je aplikacija izraza na izraz, npr. uporaba funkcije na argumentu.
+Izraz:\\
 \texttt{
 {\footnotesize type TermVariable = String}
 \begin{block}{\texttt{data Term}}
@@ -60,7 +127,8 @@ $\qquad${\small f x, g (f y), ...} \\
 
 \begin{frame}
 \frametitle{Podatkovne strukture}
-\framesubtitle{Formula}
+%\framesubtitle{Formula}
+Formula:\\
 \texttt{
 {\footnotesize type RelationVariable = String}
 \begin{block}{\texttt{data Formula}}
@@ -83,7 +151,7 @@ $\qquad${\small $\forall$ (u, v) $\in$ [R -> S]. (\textit{formula})}\\
 
 \begin{frame}
 \frametitle{Podatkovne strukture}
-\framesubtitle{Formula}
+%\framesubtitle{Formula}
 \texttt{
 \begin{block}{\texttt{data Formula}}
 $\vdots$\\
