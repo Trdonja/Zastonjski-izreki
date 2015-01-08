@@ -48,7 +48,3 @@ tIzm = ("x -> (y -> [x -> [y]]) -> y", "f")
 -- | Reverse.
 tReverse :: (String, String)
 tReverse = ("[x] -> [x]", "reverse")
-
--- | Sort.
-tSort :: (String, String)
-tSort = ("(a -> a -> Bool) -> ([a] -> [a])", "reverse")
