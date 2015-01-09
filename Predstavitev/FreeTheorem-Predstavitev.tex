@@ -39,7 +39,7 @@ Matej Aleksandrov}
 	$$f: \forall X .\mbox{ } X^* \rightarrow X^*$$
 	\pause
 	Potem za vsak $a: A \rightarrow A'$ velja izrek:
-	$$  a^* \circ f_{A} = f_{A'} \circ a $$
+	$$  a^* \circ f_{A} = f_{A'} \circ a^* $$
 	\end{frame}
 	
 	\begin{frame}
@@ -54,8 +54,8 @@ Matej Aleksandrov}
 		\vspace{-0.5cm}
 		\item $\mathcal{A}\to \mathcal{B} \subseteq (A \to B) \times (A' \to B')$:
 		 \begin{center} $ (f,f') \in \mathcal{A}\to \mathcal{B} \Leftrightarrow  \forall (x,x') \in \mathcal{A}.\mbox{ } (f(x),f'(x')) \in \mathcal{B} $  \end{center} \pause
-		\item $\forall \mathcal{X}.\mbox{ } \mathcal{K}(\mathcal{X}) \subseteq \forall X.\mbox{ } K(X) \times \forall X.\mbox{ } K'(X) $:
-		 \begin {center}$ (g,g') \in \forall \mathcal{X}.\mbox{ } \mathcal{K}(\mathcal{X})  \Leftrightarrow  \forall \mathcal{A} \subseteq (A,A').\mbox{ } (g_A,g'_{A'}) \in \mathcal{F}(\mathcal{A})$  \end{center}
+		\item $\forall \mathcal{X}.\mbox{ } \mathcal{F}(\mathcal{X}) \subseteq \forall X.\mbox{ } F(X) \times \forall X.\mbox{ } F'(X) $:
+		 \begin {center}$ (g,g') \in \forall \mathcal{X}.\mbox{ } \mathcal{F}(\mathcal{X})  \Leftrightarrow  \forall \mathcal{A} \subseteq (A,A').\mbox{ } (g_A,g'_{A'}) \in \mathcal{F}(\mathcal{A})$  \end{center}
 		\end{itemize}
 \pause
 	Konstantne tipe (Int, Bool, Char,...) predstavimo z identično relacijo.
@@ -63,7 +63,7 @@ Matej Aleksandrov}
 	
 	\begin{frame}
 	\begin{izrekparam}
-	Naj bo $\mathcal{T} \subseteq T \times T$ poljubna relacija zaprtega tipa $T$ in $t\in T$. Potem je $(t,t) \in \mathcal{T}$.
+	Naj bo $\mathcal{T} \subseteq T \times T$ relacija, ki pripada zaprtemu tipu $T$ in $t\in T$. Potem je $(t,t) \in \mathcal{T}$.
 	\end{izrekparam}
 	\pause
 	\vspace{1cm}
@@ -74,8 +74,8 @@ Matej Aleksandrov}
 	\Rightarrow & (f,f) \in \forall \mathcal{X} .\mbox{ } \mathcal{X}^* \rightarrow \mathcal{X}^* \\ \pause
 	\Rightarrow & \forall \mathcal{A} \subseteq (A,A'). \mbox{ } (f_A,f'_{A'}) \in \mathcal{A}^* \to \mathcal{A}^* \\ \pause
 	\Rightarrow & \forall \mathcal{A} \subseteq (A,A').\mbox{ }  \forall (xs,xs') \in \mathcal{A}^* . \mbox{ } (f_A (xs),f'_{A'}( xs')) \in \mathcal{A}^* \\ \pause
-	\Rightarrow & \forall a : A \to A' . \mbox{ } \forall xs \in A^* . \mbox{ } a*(xs)=xs' \Rightarrow a*(f_A(xs)) = f_{A'}(xs') \\ \pause
-	\Rightarrow & \forall a : A \to A' .  \mbox{ } a^* \circ f_{A} = f_{A'} \circ a \\
+	\Rightarrow & \forall a : A \to A' . \mbox{ } \forall xs \in A^* . \mbox{ } a^*(xs)=xs' \Rightarrow a^*(f_A(xs)) = f_{A'}(xs') \\ \pause
+	\Rightarrow & \forall a : A \to A' .  \mbox{ } a^* \circ f_{A} = f_{A'} \circ a^* \\
 	\end{eqnarray*}
 	
 	\end{frame}	
